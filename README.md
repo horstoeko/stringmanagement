@@ -1,0 +1,3 @@
+# StringManagement
+
+[![Latest Stable Version](https://poser.pugx.org/horstoeko/stringmanagement/v/stable.png)](https://packagist.org/packages/horstoeko/stringmanagement) [![Total Downloads](https://poser.pugx.org/horstoeko/stringmanagement/downloads.png)](https://packagist.org/packages/horstoeko/stringmanagement) [![Latest Unstable Version](https://poser.pugx.org/horstoeko/stringmanagement/v/unstable.png)](https://packagist.org/packages/horstoeko/stringmanagement) [![License](https://poser.pugx.org/horstoeko/stringmanagement/license.png)](https://packagist.org/packages/horstoeko/stringmanagement) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/horstoeko/stringmanagement)
