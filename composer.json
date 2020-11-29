@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "horstoeko\\stringmanagement\\": "src",
+            "horstoeko\\stringmanagement\\": "src"
         }
     },
     "autoload-dev": {
@@ -22,7 +22,7 @@
         }
     },
     "require": {
-        "php": "^7",
+        "php": "^7"
     },
     "require-dev": {
         "pdepend/pdepend" : "^2",
