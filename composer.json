@@ -1,0 +1,38 @@
+{
+    "name": "horstoeko/stringmanagement",
+    "keywords": ["stringmanagement"],
+    "description": "A library for string manipulation utilities",
+    "homepage": "https://github.com/horstoeko/stringmanagement",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Erling",
+            "email": "daniel@erling.com.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "horstoeko\\stringmanagement\\": "src",
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "horstoeko\\stringmanagement\\tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7",
+    },
+    "require-dev": {
+        "pdepend/pdepend" : "^2",
+        "phploc/phploc": "^7",
+        "phpmd/phpmd" : "@stable",
+        "phpunit/phpunit": "^9",
+        "sebastian/phpcpd": "^6",
+        "squizlabs/php_codesniffer": "^3.5",
+        "theseer/phpdox": "^0.7",
+        "goetas-webservices/xsd2php": "^0.3",
+        "clean/phpdoc-md": "^0"
+    }
+}
