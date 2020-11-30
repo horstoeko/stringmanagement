@@ -21,7 +21,7 @@ class FileUtilsTest extends TestCase
      */
     public function testFileToBase64()
     {
-        $this->assertEquals("PD9waHANCg0KbmFtZXNwYWN", substr(FileUtils::fileToBase64(__FILE__), 0, 23));
+        $this->assertEquals("PD9waHA", substr(FileUtils::fileToBase64(__FILE__), 0, 7));
         $this->assertEquals(false, FileUtils::fileToBase64(__FILE__ . ".xxx"));
     }
 }
