@@ -7,13 +7,20 @@ use \horstoeko\stringmanagement\StringUtils;
 
 class StringUtilsTest extends TestCase
 {
+    /**
+     * @covers \horstoeko\stringmanagement\StringUtils::stringIsNullOrEmpty
+     */
     public function testStringIsNullOrEmpty()
     {
         $this->assertTrue(StringUtils::stringIsNullOrEmpty(null));
         $this->assertTrue(StringUtils::stringIsNullOrEmpty(""));
         $this->assertFalse(StringUtils::stringIsNullOrEmpty("abc"));
+        $this->assertFalse(StringUtils::stringIsNullOrEmpty(222));
     }
 
+    /**
+     * @covers \horstoeko\stringmanagement\StringUtils::strisstartingwith
+     */
     public function testStrisstartingwith()
     {
         $this->assertTrue(StringUtils::strisstartingwith("abcdef", "abc"));
