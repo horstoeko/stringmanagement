@@ -8,9 +8,9 @@ use \horstoeko\stringmanagement\FileUtils;
 class FileUtilsTest extends TestCase
 {
     /**
-     * @covers \horstoeko\stringmanagement\FileUtils::combinePathWithFile
+     * @covers \horstoeko\stringmanagement\FileUtils::fileExists
      */
-    public function testCombinePathWithFile()
+    public function testFileExists()
     {
         $this->assertTrue(FileUtils::fileExists(__FILE__, true));
         $this->assertFalse(FileUtils::fileExists(__FILE__ . ".xxx", true));
