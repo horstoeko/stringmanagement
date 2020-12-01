@@ -56,6 +56,11 @@ class FileUtils
         }
 
         $data = file_get_contents($filename);
+
+        if ($data === false) {
+            return false;
+        }
+
         $data = base64_encode($data);
 
         if (StringUtils::stringIsNullOrEmpty($data)) {
