@@ -64,34 +64,4 @@ class PathUtils
 
         return $result;
     }
-
-    /**
-     * Combine a filename (which has no extension) with a fileextension
-     *
-     * @param string $filename
-     * @param string $fileextension
-     * @return string
-     */
-    public static function combineFilenameWithFileextension(string $filename, string $fileextension): string
-    {
-        $extensionDelimiter = ".";
-        $filename = rtrim($filename, $extensionDelimiter);
-        $fileextension = ltrim($fileextension, $extensionDelimiter);
-        return $filename . $extensionDelimiter . $fileextension;
-    }
-
-    /**
-     * Get the extension of a file. The return values starts with a dot
-     *
-     * @param string $filename
-     * @return string
-     */
-    public static function getFileExtension(string $filename): string
-    {
-        $fileextension = pathinfo($filename, PATHINFO_EXTENSION);
-        if (substr($fileextension, 0, 1) != ".") {
-            $fileextension = "." . $fileextension;
-        }
-        return $fileextension;
-    }
 }

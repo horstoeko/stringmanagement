@@ -34,31 +34,11 @@ class PathUtilsTest extends TestCase
     public function testCombineAllPaths()
     {
         $this->assertEquals("/home/user/john", PathUtils::combineAllPaths("home", "user", "john"));
-    }
-
-    /**
-     * @covers \horstoeko\stringmanagement\PathUtils::combineFilenameWithFileextension
-     */
-    public function testCombineFilenameWithFileextension()
-    {
-        $this->assertEquals("file.txt", PathUtils::combineFilenameWithFileextension("file", "txt"));
-        $this->assertEquals("file.txt", PathUtils::combineFilenameWithFileextension("file.", "txt"));
-        $this->assertEquals("file.txt", PathUtils::combineFilenameWithFileextension("file.", ".txt"));
-        $this->assertEquals("file.txt", PathUtils::combineFilenameWithFileextension("file", "txt"));
-        $this->assertEquals("file.txt", PathUtils::combineFilenameWithFileextension("file..", "txt"));
-        $this->assertEquals("file.txt", PathUtils::combineFilenameWithFileextension("file..", "..txt"));
-        $this->assertEquals("file.x.txt", PathUtils::combineFilenameWithFileextension("file.x", "txt"));
-        $this->assertEquals("file.x.txt", PathUtils::combineFilenameWithFileextension("file.x", ".txt"));
-        $this->assertEquals("/home/john/file.txt", PathUtils::combineFilenameWithFileextension("/home/john/file", "txt"));
-    }
-
-    /**
-     * @covers \horstoeko\stringmanagement\PathUtils::getFileExtension
-     */
-    public function testGetFileExtension()
-    {
-        $this->assertEquals(".txt", PathUtils::getFileExtension("file.txt"));
-        $this->assertEquals(".txt", PathUtils::getFileExtension("file.x.txt"));
-        $this->assertEquals(".txt", PathUtils::getFileExtension("/home/john/file.x.txt"));
+        $this->assertEquals("/home/user/john", PathUtils::combineAllPaths("/home", "user", "john"));
+        $this->assertEquals("/home/user/john", PathUtils::combineAllPaths("/home", "/user", "john"));
+        $this->assertEquals("/home/user/john", PathUtils::combineAllPaths("/home", "/user", "/john"));
+        $this->assertEquals("/home/user/john", PathUtils::combineAllPaths("/home//", "user", "john"));
+        $this->assertEquals("/home/user/john", PathUtils::combineAllPaths("/home//", "/user//", "john"));
+        $this->assertEquals("/home/user/john", PathUtils::combineAllPaths("/home//", "/user//", "/john"));
     }
 }
