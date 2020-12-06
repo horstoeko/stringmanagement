@@ -51,6 +51,34 @@ class FileUtilsTest extends TestCase
     }
 
     /**
+     * @covers \horstoeko\stringmanagement\FileUtils::base64ToFile
+     */
+    public function testBase64ToFile()
+    {
+        $sourceData = "SSBhbSBhIHRlc3RmaWxlLiBEb24ndCBtb2RpZnkgbWUuLi4=";
+        $destinationFilename = dirname(__FILE__) . "/data/decbase64.txt";
+        $this->assertTrue(FileUtils::base64ToFile($sourceData, $destinationFilename));
+        $this->assertTrue(FileUtils::fileExists($destinationFilename));
+        $destinationFilenameContent = file_get_contents($destinationFilename);
+        $this->assertEquals("I am a testfile. Don", substr($destinationFilenameContent, 0, 20));
+        @unlink($destinationFilename);
+    }
+
+    /**
+     * @covers \horstoeko\stringmanagement\FileUtils::base64FileToFile
+     */
+    public function testBase64FileToFile()
+    {
+        $sourceFilename = dirname(__FILE__) . "/data/base64.txt";
+        $destinationFilename = dirname(__FILE__) . "/data/decbase64.txt";
+        $this->assertTrue(FileUtils::base64FileToFile($sourceFilename, $destinationFilename));
+        $this->assertTrue(FileUtils::fileExists($destinationFilename));
+        $destinationFilenameContent = file_get_contents($destinationFilename);
+        $this->assertEquals("I am a testfile. Don", substr($destinationFilenameContent, 0, 20));
+        @unlink($destinationFilename);
+    }
+
+    /**
      * @covers \horstoeko\stringmanagement\FileUtils::combineFilenameWithFileextension
      */
     public function testCombineFilenameWithFileextension()

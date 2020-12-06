@@ -95,6 +95,44 @@ class FileUtils
     }
 
     /**
+     * Decodes a base64 string and saves it to file
+     *
+     * @param string $base64String
+     * The base64 encoded data
+     * @param string $toFilename
+     * Filename to which the binary (=decoded base64) data is saved to
+     * @return boolean
+     */
+    public static function base64ToFile(string $base64String, string $toFilename): bool
+    {
+        return file_put_contents($toFilename, base64_decode($base64String)) !== false;
+    }
+
+    /**
+     * Decodes a file which is containing base64 data to another file
+     *
+     * @param string $filename
+     * Name of the file which contains base64 data
+     * @param string $toFilename
+     * Filename where the decoded base64 data are stored to
+     * @return boolean
+     */
+    public static function base64FileToFile(string $filename, string $toFilename): bool
+    {
+        if (self::fileExists($filename) === false) {
+            return false;
+        }
+
+        $base64String = file_get_contents($filename);
+
+        if ($base64String === false) {
+            return false;
+        }
+
+        return self::base64ToFile($base64String, $toFilename);
+    }
+
+    /**
      * Combine a filename (which has no extension) with a fileextension
      *
      * @param string $filename

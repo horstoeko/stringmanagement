@@ -116,6 +116,97 @@ To turn off the readble check set $checkreadable to false</p>                </d
 this function returns false</p>                </div>
                 <div class="col-md-2"></div>
             </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fileToBase64File">fileToBase64File</a>(string $filename, string $toFilename)
+        
+                                            <p>Converts the content of a file to BASE64 encoded file</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_base64ToFile">base64ToFile</a>(string $base64String, string $toFilename)
+        
+                                            <p>Decodes a base64 string and saves it to file</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_base64FileToFile">base64FileToFile</a>(string $filename, string $toFilename)
+        
+                                            <p>Decodes a file which is containing base64 data to another file</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_combineFilenameWithFileextension">combineFilenameWithFileextension</a>(string $filename, string $fileextension)
+        
+                                            <p>Combine a filename (which has no extension) with a fileextension</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFileDirectory">getFileDirectory</a>(string $filename)
+        
+                                            <p>Returns the directory where $filename is located</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFilenameWithExtension">getFilenameWithExtension</a>(string $filename)
+        
+                                            <p>Returns the filename only including it's extension</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFilenameWithoutExtension">getFilenameWithoutExtension</a>(string $filename)
+        
+                                            <p>Returns the filename only without it's extension</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFileExtension">getFileExtension</a>(string $filename, bool $withdot = false)
+        
+                                            <p>Returns the fileextension of a $filename, Optionally you can
+add the dot on the beginning</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_changeFileExtension">changeFileExtension</a>(string $filename, string $newFileextension)
+        
+                                            <p>Change the extension of a filename</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
             </div>
 
 
@@ -124,7 +215,7 @@ this function returns false</p>                </div>
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_fileExists">
-        <div class="location">at         line 33</div>
+        <div class="location">at         line 34</div>
         <code>        static            bool
     <strong>fileExists</strong>(string $filename, bool $checkreadable = true)
         </code>
@@ -170,7 +261,7 @@ To turn off the readble check set $checkreadable to false</p>                   
             </div>
                     <div class="method-item">
                     <h3 id="method_fileToBase64">
-        <div class="location">at         line 51</div>
+        <div class="location">at         line 52</div>
         <code>        static            boolean|string
     <strong>fileToBase64</strong>(string $filename)
         </code>
@@ -199,6 +290,397 @@ this function returns false</p>                                                <
                     <table class="table table-condensed">
         <tr>
             <td>boolean|string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_fileToBase64File">
+        <div class="location">at         line 82</div>
+        <code>        static            bool
+    <strong>fileToBase64File</strong>(string $filename, string $toFilename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Converts the content of a file to BASE64 encoded file</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td>Source filename</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$toFilename</td>
+                <td>Filename to which the BASE64 is saved to</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_base64ToFile">
+        <div class="location">at         line 106</div>
+        <code>        static            bool
+    <strong>base64ToFile</strong>(string $base64String, string $toFilename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Decodes a base64 string and saves it to file</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$base64String</td>
+                <td>The base64 encoded data</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$toFilename</td>
+                <td>Filename to which the binary (=decoded base64) data is saved to</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_base64FileToFile">
+        <div class="location">at         line 120</div>
+        <code>        static            bool
+    <strong>base64FileToFile</strong>(string $filename, string $toFilename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Decodes a file which is containing base64 data to another file</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td>Name of the file which contains base64 data</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$toFilename</td>
+                <td>Filename where the decoded base64 data are stored to</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_combineFilenameWithFileextension">
+        <div class="location">at         line 142</div>
+        <code>        static            string
+    <strong>combineFilenameWithFileextension</strong>(string $filename, string $fileextension)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Combine a filename (which has no extension) with a fileextension</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$fileextension</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFileDirectory">
+        <div class="location">at         line 156</div>
+        <code>        static            string
+    <strong>getFileDirectory</strong>(string $filename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns the directory where $filename is located</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFilenameWithExtension">
+        <div class="location">at         line 167</div>
+        <code>        static            string
+    <strong>getFilenameWithExtension</strong>(string $filename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns the filename only including it's extension</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFilenameWithoutExtension">
+        <div class="location">at         line 178</div>
+        <code>        static            string
+    <strong>getFilenameWithoutExtension</strong>(string $filename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns the filename only without it's extension</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFileExtension">
+        <div class="location">at         line 191</div>
+        <code>        static            string
+    <strong>getFileExtension</strong>(string $filename, bool $withdot = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Returns the fileextension of a $filename, Optionally you can
+add the dot on the beginning</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$withdot</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_changeFileExtension">
+        <div class="location">at         line 209</div>
+        <code>        static            string
+    <strong>changeFileExtension</strong>(string $filename, string $newFileextension)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Change the extension of a filename</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$filename</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$newFileextension</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
             <td></td>
         </tr>
     </table>
