@@ -10,7 +10,7 @@ class StringUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\StringUtils::stringIsNullOrEmpty
      */
-    public function testStringIsNullOrEmpty()
+    public function testStringIsNullOrEmpty(): void
     {
         $this->assertTrue(StringUtils::stringIsNullOrEmpty(null));
         $this->assertTrue(StringUtils::stringIsNullOrEmpty(""));
@@ -21,7 +21,7 @@ class StringUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\StringUtils::strisstartingwith
      */
-    public function testStrisstartingwith()
+    public function testStrisstartingwith(): void
     {
         $this->assertTrue(StringUtils::strisstartingwith("abcdef", "abc"));
         $this->assertFalse(StringUtils::strisstartingwith("abcdef", "ABC"));

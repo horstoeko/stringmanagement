@@ -210,6 +210,13 @@ class FileUtils
     {
         $directory = static::getFileDirectory($filename);
         $filename = static::getFilenameWithoutExtension($filename);
-        return PathUtils::combinePathWithFile($directory, static::combineFilenameWithFileextension($filename, $newFileextension));
+
+        return PathUtils::combinePathWithFile(
+            $directory,
+            static::combineFilenameWithFileextension(
+                $filename,
+                $newFileextension
+            )
+        );
     }
 }

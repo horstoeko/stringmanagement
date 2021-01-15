@@ -64,4 +64,63 @@ class PathUtils
 
         return $result;
     }
+
+    /**
+     * Generate a hashed directory structur
+     *
+     * @param integer $maxLevel
+     * @return string
+     */
+    public static function getHashedDirectory(int $maxLevel = 1): string
+    {
+        if ($maxLevel <= 0) {
+            throw new \Exception("The maximum level must be greater than zero");
+        }
+
+        $result = "";
+
+        for ($level = 1; $level <= $maxLevel; $level++) {
+            $result = self::combinePathWithPath($result, chr(rand(97, 122)));
+        }
+
+        return $result;
+    }
+
+    /**
+     * Create a hashed directory
+     *
+     * @param string $basedir
+     * @param integer $maxLevel
+     * @param integer $mode
+     * @return boolean|string
+     */
+    public static function createHashedDirectory(string $basedir, int $maxLevel = 1, $mode = 0777)
+    {
+        $directory = self::combinePathWithPath($basedir, self::getHashedDirectory($maxLevel));
+
+        if (mkdir($directory, $mode, true)) {
+            return $directory;
+        }
+
+        return false;
+    }
+
+    /**
+     * Remove directory in a recursive way
+     *
+     * @param string $directory
+     * @return void
+     */
+    public static function recursiveRemoveDirectory(string $directory): void
+    {
+        foreach (glob(self::combineAllPaths($directory, "/*")) as $file) {
+            if (is_dir($file)) {
+                self::recursiveRemoveDirectory($file);
+            } else {
+                unlink($file);
+            }
+        }
+
+        rmdir($directory);
+    }
 }

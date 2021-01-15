@@ -10,7 +10,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::fileExists
      */
-    public function testFileExists()
+    public function testFileExists(): void
     {
         $this->assertTrue(FileUtils::fileExists(__FILE__, true));
         $this->assertFalse(FileUtils::fileExists(__FILE__ . ".xxx", true));
@@ -19,7 +19,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::fileToBase64
      */
-    public function testFileToBase64()
+    public function testFileToBase64(): void
     {
         $this->assertEquals("SSBhbSBhIHRlc3RmaWxl", substr(FileUtils::fileToBase64(dirname(__FILE__) . "/data/tobase64.txt"), 0, 20));
         $this->assertEquals(false, FileUtils::fileToBase64(__FILE__ . ".xxx"));
@@ -28,7 +28,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::fileToBase64File
      */
-    public function testFileToBase64File()
+    public function testFileToBase64File(): void
     {
         $sourceFilename = dirname(__FILE__) . "/data/tobase64.txt";
         $destinationFilename = dirname(__FILE__) . "/data/encbase64.txt";
@@ -42,7 +42,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::fileToBase64File
      */
-    public function testFileToBase64FileSourceNotExisting()
+    public function testFileToBase64FileSourceNotExisting(): void
     {
         $sourceFilename = dirname(__FILE__) . "/data/tobase64_2.txt";
         $destinationFilename = dirname(__FILE__) . "/data/encbase64_2.txt";
@@ -53,7 +53,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::base64ToFile
      */
-    public function testBase64ToFile()
+    public function testBase64ToFile(): void
     {
         $sourceData = "SSBhbSBhIHRlc3RmaWxlLiBEb24ndCBtb2RpZnkgbWUuLi4=";
         $destinationFilename = dirname(__FILE__) . "/data/decbase64.txt";
@@ -67,7 +67,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::base64FileToFile
      */
-    public function testBase64FileToFile()
+    public function testBase64FileToFile(): void
     {
         $sourceFilename = dirname(__FILE__) . "/data/base64.txt";
         $destinationFilename = dirname(__FILE__) . "/data/decbase64.txt";
@@ -81,7 +81,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::combineFilenameWithFileextension
      */
-    public function testCombineFilenameWithFileextension()
+    public function testCombineFilenameWithFileextension(): void
     {
         $this->assertEquals("file.txt", FileUtils::combineFilenameWithFileextension("file", "txt"));
         $this->assertEquals("file.txt", FileUtils::combineFilenameWithFileextension("file.", "txt"));
@@ -96,7 +96,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::getFileDirectory
      */
-    public function testGetFileDirectory()
+    public function testGetFileDirectory(): void
     {
         $this->assertEquals("/home/john", FileUtils::getFileDirectory("/home/john/file.txt"));
         $this->assertEquals("/home/john", FileUtils::getFileDirectory("/home/john/file.x.txt"));
@@ -105,7 +105,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::getFilenameWithExtension
      */
-    public function testGetFilenameWithExtension()
+    public function testGetFilenameWithExtension(): void
     {
         $this->assertEquals("file.txt", FileUtils::getFilenameWithExtension("/home/john/file.txt"));
         $this->assertEquals("file.x.txt", FileUtils::getFilenameWithExtension("/home/john/file.x.txt"));
@@ -114,7 +114,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::getFilenameWithoutExtension
      */
-    public function testGetFilenameWithoutExtension()
+    public function testGetFilenameWithoutExtension(): void
     {
         $this->assertEquals("file", FileUtils::getFilenameWithoutExtension("/home/john/file.txt"));
         $this->assertEquals("file.x", FileUtils::getFilenameWithoutExtension("/home/john/file.x.txt"));
@@ -123,7 +123,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::getFileExtension
      */
-    public function testGetFileExtension()
+    public function testGetFileExtension(): void
     {
         $this->assertEquals(".txt", FileUtils::getFileExtension("file.txt", true));
         $this->assertEquals(".txt", FileUtils::getFileExtension("file.x.txt", true));
@@ -136,7 +136,7 @@ class FileUtilsTest extends TestCase
     /**
      * @covers \horstoeko\stringmanagement\FileUtils::changeFileExtension
      */
-    public function testChangeFileExtension()
+    public function testChangeFileExtension(): void
     {
         $this->assertEquals("./file.new", FileUtils::changeFileExtension("file.txt", "new"));
         $this->assertEquals("./file.new", FileUtils::changeFileExtension("file.txt", ".new"));
