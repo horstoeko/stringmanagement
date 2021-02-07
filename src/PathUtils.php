@@ -98,6 +98,10 @@ class PathUtils
     {
         $directory = self::combinePathWithPath($basedir, self::getHashedDirectory($maxLevel));
 
+        if (is_dir($directory)) {
+            return $directory;
+        }
+
         if (mkdir($directory, $mode, true)) {
             return $directory;
         }
