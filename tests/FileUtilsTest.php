@@ -143,4 +143,22 @@ class FileUtilsTest extends TestCase
         $this->assertEquals("/home/john/file.new", FileUtils::changeFileExtension("/home/john/file.txt", "new"));
         $this->assertEquals("/home/john/file.new", FileUtils::changeFileExtension("/home/john/file.txt", ".new"));
     }
+
+    /**
+     * @covers \horstoeko\stringmanagement\FileUtils::getFileSize
+     */
+    public function testGetFileSize(): void
+    {
+        $this->assertEquals(35, FileUtils::getFileSize(dirname(__FILE__) . "/data/tobase64.txt"));
+        $this->assertEquals(0, FileUtils::getFileSize(dirname(__FILE__) . "/data/filenotexists.txt"));
+    }
+
+    /**
+     * @covers \horstoeko\stringmanagement\FileUtils::getFileSizeFromBase64String
+     */
+    public function testGetFileSizeFromBase64String(): void
+    {
+        $this->assertEquals(35, FileUtils::getFileSizeFromBase64String("SSBhbSBhIHRlc3RmaWxlLiBEb24ndCBtb2RpZnkgbWUuLi4="));
+        $this->assertEquals(0, FileUtils::getFileSizeFromBase64String(""));
+    }
 }

@@ -219,4 +219,36 @@ class FileUtils
             )
         );
     }
+
+    /**
+     * Returns the size of the file $filename
+     *
+     * @param string $filename
+     * @return integer
+     */
+    public static function getFileSize(string $filename): int
+    {
+        if (!self::fileExists($filename)) {
+            return 0;
+        }
+
+        return filesize($filename);
+    }
+
+    /**
+     * Get the file real file size of a base64 encoded string
+     *
+     * @param string $base64string
+     * @return integer
+     */
+    public static function getFileSizeFromBase64String(string $base64string): int
+    {
+        $decodedBase64String = base64_decode($base64string);
+
+        if ($decodedBase64String === false) {
+            return 0;
+        }
+
+        return strlen($decodedBase64String);
+    }
 }
