@@ -14,7 +14,9 @@ class StringUtilsTest extends TestCase
     {
         $this->assertTrue(StringUtils::stringIsNullOrEmpty(null));
         $this->assertTrue(StringUtils::stringIsNullOrEmpty(""));
+        $this->assertTrue(StringUtils::stringIsNullOrEmpty("  "));
         $this->assertFalse(StringUtils::stringIsNullOrEmpty("abc"));
+        $this->assertFalse(StringUtils::stringIsNullOrEmpty(" abc "));
         $this->assertFalse(StringUtils::stringIsNullOrEmpty(222));
     }
 

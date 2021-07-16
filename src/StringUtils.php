@@ -29,7 +29,7 @@ class StringUtils
      */
     public static function stringIsNullOrEmpty(?string $str): bool
     {
-        return ($str == null || $str == "");
+        return (!isset($str) || trim($str) === '');
     }
 
     /**
