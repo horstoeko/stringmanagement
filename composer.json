@@ -21,6 +21,9 @@
             "horstoeko\\stringmanagement\\tests\\": "tests"
         }
     },
+    "require": {
+        "php": "^7.3|^8.0|^8.1"
+    },
     "require-dev": {
         "pdepend/pdepend" : "^2",
         "phploc/phploc": "^7",
