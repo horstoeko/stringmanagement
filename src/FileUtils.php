@@ -245,7 +245,7 @@ class FileUtils
     {
         $decodedBase64String = base64_decode($base64string);
 
-        if ($decodedBase64String === false) {
+        if ($decodedBase64String == false) {
             return 0;
         }
 
