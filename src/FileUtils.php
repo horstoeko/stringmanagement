@@ -27,8 +27,8 @@ class FileUtils
      * Check if file $filename exists, also checks if it's readable
      * To turn off the readble check set $checkreadable to false
      *
-     * @param string $filename
-     * @param boolean $checkreadable
+     * @param  string  $filename
+     * @param  boolean $checkreadable
      * @return boolean
      */
     public static function fileExists(string $filename, bool $checkreadable = true): bool
@@ -46,7 +46,7 @@ class FileUtils
      * Converts a file $filename to base64 string. If the file does not exist
      * this function returns false
      *
-     * @param string $filename
+     * @param  string $filename
      * @return boolean|string
      */
     public static function fileToBase64(string $filename)
@@ -73,9 +73,9 @@ class FileUtils
     /**
      * Converts the content of a file to BASE64 encoded file
      *
-     * @param string $filename
+     * @param  string $filename
      * Source filename
-     * @param string $toFilename
+     * @param  string $toFilename
      * Filename to which the BASE64 is saved to
      * @return boolean
      */
@@ -97,9 +97,9 @@ class FileUtils
     /**
      * Decodes a base64 string and saves it to file
      *
-     * @param string $base64String
+     * @param  string $base64String
      * The base64 encoded data
-     * @param string $toFilename
+     * @param  string $toFilename
      * Filename to which the binary (=decoded base64) data is saved to
      * @return boolean
      */
@@ -111,9 +111,9 @@ class FileUtils
     /**
      * Decodes a file which is containing base64 data to another file
      *
-     * @param string $filename
+     * @param  string $filename
      * Name of the file which contains base64 data
-     * @param string $toFilename
+     * @param  string $toFilename
      * Filename where the decoded base64 data are stored to
      * @return boolean
      */
@@ -135,8 +135,8 @@ class FileUtils
     /**
      * Combine a filename (which has no extension) with a fileextension
      *
-     * @param string $filename
-     * @param string $fileextension
+     * @param  string $filename
+     * @param  string $fileextension
      * @return string
      */
     public static function combineFilenameWithFileextension(string $filename, string $fileextension): string
@@ -150,7 +150,7 @@ class FileUtils
     /**
      * Returns the directory where $filename is located
      *
-     * @param string $filename
+     * @param  string $filename
      * @return string
      */
     public static function getFileDirectory(string $filename): string
@@ -161,7 +161,7 @@ class FileUtils
     /**
      * Returns the filename only including it's extension
      *
-     * @param string $filename
+     * @param  string $filename
      * @return string
      */
     public static function getFilenameWithExtension(string $filename): string
@@ -172,7 +172,7 @@ class FileUtils
     /**
      * Returns the filename only without it's extension
      *
-     * @param string $filename
+     * @param  string $filename
      * @return string
      */
     public static function getFilenameWithoutExtension(string $filename): string
@@ -184,8 +184,8 @@ class FileUtils
      * Returns the fileextension of a $filename, Optionally you can
      * add the dot on the beginning
      *
-     * @param string $filename
-     * @param boolean $withdot
+     * @param  string  $filename
+     * @param  boolean $withdot
      * @return string
      */
     public static function getFileExtension(string $filename, bool $withdot = false): string
@@ -202,8 +202,8 @@ class FileUtils
     /**
      * Change the extension of a filename
      *
-     * @param string $filename
-     * @param string $newFileextension
+     * @param  string $filename
+     * @param  string $newFileextension
      * @return string
      */
     public static function changeFileExtension(string $filename, string $newFileextension): string
@@ -223,7 +223,7 @@ class FileUtils
     /**
      * Returns the size of the file $filename
      *
-     * @param string $filename
+     * @param  string $filename
      * @return integer
      */
     public static function getFileSize(string $filename): int
@@ -238,7 +238,7 @@ class FileUtils
     /**
      * Get the file real file size of a base64 encoded string
      *
-     * @param string $base64string
+     * @param  string $base64string
      * @return integer
      */
     public static function getFileSizeFromBase64String(string $base64string): int

@@ -24,7 +24,7 @@ class StringUtils
      * Its like the almost known C#-Methods
      * Tests is string is not nul and has a value != ""
      *
-     * @param string|null $str
+     * @param  string|null $str
      * @return boolean
      */
     public static function stringIsNullOrEmpty(?string $str): bool
@@ -37,9 +37,9 @@ class StringUtils
      * The parameter $acaseinsensitive controls wether the comparission is
      * case sensitive or not
      *
-     * @param string $astring
-     * @param string $astartswith
-     * @param boolean $acaseinsensitive
+     * @param  string  $astring
+     * @param  string  $astartswith
+     * @param  boolean $acaseinsensitive
      * @return boolean
      */
     public static function strisstartingwith(string $astring, string $astartswith, bool $acaseinsensitive = false): bool
