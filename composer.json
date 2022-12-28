@@ -25,7 +25,6 @@
         "php": "^7.3|^8.0|^8.1"
     },
     "require-dev": {
-        "clean/phpdoc-md": "^0",
         "pdepend/pdepend": "^2",
         "phploc/phploc": "^7",
         "phpmd/phpmd": "^2",
