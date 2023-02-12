@@ -241,7 +241,7 @@
     </target>
     <target name="deploy" description="Deplay build">
         <zip destfile="${project.basedir}/build/dist/doc.zip">
-            <fileset dir="${project.basedir}/doc">
+            <fileset dir="${project.basedir}/build/doc">
                 <include name="**/*.*"/>
             </fileset>
         </zip>
@@ -267,7 +267,6 @@
             <then>
                 <phingcall target="clean" />
                 <phingcall target="downloadphpdocumentor" />
-                <delete dir="${project.basedir}/doc"/>
                 <exec executable="php" dir="${project.basedir}/build">
                     <arg path="${phpdocumentor}"/>
                 </exec>
