@@ -1,9 +1,10 @@
-name: CI (Ant)
+name: CI (Ant, PHP 7.3)
 
 on: [push]
 
 jobs:
   build:
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
@@ -14,11 +15,6 @@ jobs:
             php-version: '7.3'
             extensions: imagick, swoole      
             coverage: xdebug
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-            java-version: '11'
-            distribution: 'adopt'
       - name: Build with Ant
         run: ant -noinput -buildfile build.ant.xml
       - name: Publish Unit Test Results

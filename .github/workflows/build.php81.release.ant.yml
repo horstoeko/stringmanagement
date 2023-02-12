@@ -1,6 +1,9 @@
-name: CI (Ant, PHP 8.1)
+name: Release
 
-on: [push]
+on:
+  push:
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -13,7 +16,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
             php-version: '8.1'
-            extensions: imagick, swoole      
+            extensions: imagick, swoole
             coverage: xdebug
       - name: Build with Ant
         run: ant -noinput -buildfile build.ant.xml
@@ -22,3 +25,11 @@ jobs:
         if: always()
         with:
             files: "./build/logs/junit.xml"
+      - name: Make Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+            repo_token: "${{ secrets.GITHUB_TOKEN }}"
+            prerelease: false
+            files: |
+                build/dist/doc.zip
+                build/dist/builddoc.zip
