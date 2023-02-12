@@ -2,17 +2,16 @@
 <project name="php-automate-build-ant" default="full-build" basedir=".">
     <!-- By default the tools are managed by Composer in ${project.basedir}/vendor/bin -->
     <property name="url.composer.download" value="https://getcomposer.org/download/2.2.6/composer.phar"/>
-    <property name="url.phpdox.download" value="https://github.com/theseer/phpdox/releases/download/0.12.0/phpdox-0.12.0.phar"/>
+    <property name="url.phpdocumentor.download" value="https://phpdoc.org/phpDocumentor.phar"/>
     <property name="composer" value="${project.basedir}/composer.phar"/>
+    <property name="phpdocumentor" value="${project.basedir}/phpDocumentor.phar"/>
     <property name="pdepend" value="${project.basedir}/vendor/bin/pdepend"/>
     <property name="phpcpd" value="${project.basedir}/vendor/bin/phpcpd"/>
     <property name="phpcs" value="${project.basedir}/vendor/bin/phpcs"/>
-    <property name="phpdox" value="${project.basedir}/phpdox.phar"/>
     <property name="phploc" value="${project.basedir}/vendor/bin/phploc"/>
     <property name="phpmd" value="${project.basedir}/vendor/bin/phpmd"/>
     <property name="phpunit" value="${project.basedir}/vendor/bin/phpunit"/>
     <property name="phpstan" value="${project.basedir}/vendor/bin/phpstan"/>
-    <property name="sami" value="/usr/local/sbin/sami.phar"/>
     <property name="git" value="/usr/bin/git"/>
     <target name="clean" unless="clean.done" description="Cleanup build artifacts.">
         <delete dir="${project.basedir}/build/builddoc"/>
@@ -21,8 +20,8 @@
         <delete dir="${project.basedir}/build/coverage"/>
         <delete dir="${project.basedir}/build/logs"/>
         <delete dir="${project.basedir}/build/pdepend"/>
-        <delete dir="${project.basedir}/build/phpdox"/>
         <delete dir="${project.basedir}/build/dist"/>
+        <delete dir="${project.basedir}/build/phpdoc"/>
         <property name="clean.done" value="true"/>
     </target>
     <target name="composer" description="Install composer packages including require-dev.">
@@ -46,18 +45,18 @@
             <arg value="update"/>
         </exec>
     </target>
-    <target name="downloadphpdox" description="Install phpdox.">
+    <target name="downloadphpdocumentor" description="Install phpdocumentor">
         <exec executable="wget">
-            <arg path="${url.phpdox.download}"/>
+            <arg path="${url.phpdocumentor.download}"/>
             <arg value="-O"/>
-            <arg path="${phpdox}"/>
+            <arg path="${phpdocumentor}"/>
         </exec>
         <exec executable="chmod">
             <arg value="+x"/>
-            <arg path="${phpdox}"/>
+            <arg path="${phpdocumentor}"/>
         </exec>
     </target>
-    <target name="full-build" depends="prepare,composer,static-analysis,phpunit,phpdox,-check-failure,projectdoc,deploy" description="Perform static analysis, run tests, and generate project documentation.">
+    <target name="full-build" depends="prepare,composer,static-analysis,phpunit,-check-failure,deploy" description="Perform static analysis, run tests, and generate project documentation.">
         <echo message="Built"/>
     </target>
     <target name="lint" unless="lint.done" description="Perform syntax check of PHP sourcecode files.">
@@ -146,12 +145,6 @@
         <echo message="${phpstan.output}" file="${project.basedir}/build/logs/checkstyle_phpstan.xml"/>
         <property name="phpstan.done" value="true"/>
     </target>
-    <target name="phpdox" unless="phpdox.done" depends="downloadphpdox,phploc-ci,phpcs-ci,phpmd-ci,phpstan-ci" description="Generate project documentation using phpDox.">
-        <exec executable="php" dir="${project.basedir}/build" taskname="phpdox">
-            <arg path="${phpdox}"/>
-        </exec>
-        <property name="phpdox.done" value="true"/>
-    </target>
     <target name="phploc" unless="phploc.done" description="Measure project size using PHPLOC and print human readable output. Intended for usage on the command line.">
         <exec executable="${phploc}" taskname="phploc">
             <arg value="--count-tests"/>
@@ -207,7 +200,6 @@
         <exec executable="${phpunit}" returnProperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
             <arg path="${project.basedir}/build/phpunit.xml"/>
-            <arg path="tests"/>
         </exec>
         <property name="phpunit.done" value="true"/>
     </target>
@@ -227,8 +219,8 @@
         <mkdir dir="${project.basedir}/build/coverage"/>
         <mkdir dir="${project.basedir}/build/logs"/>
         <mkdir dir="${project.basedir}/build/pdepend"/>
-        <mkdir dir="${project.basedir}/build/phpdox"/>
         <mkdir dir="${project.basedir}/build/dist"/>
+        <mkdir dir="${project.basedir}/build/phpdoc"/>
         <property name="prepare.done" value="true"/>
     </target>
     <target name="quick-build" depends="prepare,composer,lint,phpunit-no-coverage" description="Perform lint check and run tests without generating code coverage reports.">
@@ -247,22 +239,9 @@
         </fail>
         <echo message="Checked failure"/>
     </target>
-    <target name="projectdoc" depends="prepare" description="Generator project documentation using sami.">
-        <exec executable="php" taskname="projectdoc">
-            <arg path="${sami}"/>
-            <arg value="update"/>
-            <arg path="${project.basedir}/build/sami.config.php"/>
-        </exec>
-        <delete file="${project.basedir}/build/doc/PROJECT_VERSION"/>
-        <delete file="${project.basedir}/build/doc/SAMI_VERSION"/>
-        <delete file="${project.basedir}/build/doc/renderer.index"/>
-        <delete file="${project.basedir}/build/doc/opensearch.xml"/>
-        <delete dir="${project.basedir}/build/cache"/>
-        <property name="projectdoc.done" value="true"/>
-    </target>
     <target name="deploy" description="Deplay build">
         <zip destfile="${project.basedir}/build/dist/doc.zip">
-            <fileset dir="${project.basedir}/build/doc">
+            <fileset dir="${project.basedir}/doc">
                 <include name="**/*.*"/>
             </fileset>
         </zip>
@@ -278,46 +257,26 @@
                 <include name="coverage-html/**/*.*"/>
                 <include name="logs/**/*.*"/>
                 <include name="pdepend/**/*.*"/>
-                <include name="phpdox/**/*.*"/>
+                <exclude name="phpdoc/**/*.*"/>
             </fileset>
         </zip>
-        <!--
-        <copy todir="${project.basedir}/doc">
-            <fileset dir="${project.basedir}/build/doc">
-                <include name= "**/*.*" />
-            </fileset>
-        </copy>
-        <exec executable="${git}" passthru="true">
-            <arg value="add"/>
-            <arg path="${project.basedir}/doc"/>
-        </exec>
-        <exec executable="${git}" passthru="true">
-            <arg value="commit"/>
-            <arg value="-a"/>
-            <arg value="-m"/>
-            <arg value="Updated documentation"/>
-        </exec>
-        <exec executable="${git}" passthru="true">
-            <arg value="push"/>
-            <arg path="origin"/>
-            <arg path="master:master"/>
-        </exec>
-        -->
     </target>
-    <target name="projectdocstandalone" description="Generator project documentation using sami.">
-        <delete dir="${project.basedir}/cache"/>
-        <delete dir="${project.basedir}/doc"/>
-        <mkdir dir="${project.basedir}/cache"/>
-        <mkdir dir="${project.basedir}/doc"/>
-        <exec executable="php" taskname="projectdoc">
-            <arg path="${sami}"/>
-            <arg value="update"/>
-            <arg path="${project.basedir}/build/sami.config.deploy.php"/>
-        </exec>
-        <delete file="${project.basedir}/doc/PROJECT_VERSION"/>
-        <delete file="${project.basedir}/doc/SAMI_VERSION"/>
-        <delete file="${project.basedir}/doc/renderer.index"/>
-        <delete file="${project.basedir}/doc/opensearch.xml"/>
-        <delete dir="${project.basedir}/cache"/>
+    <target name="projectdoc" description="Generate documentation">
+        <if>
+            <versioncompare version="${php.version}" desiredVersion="7.4" operator=">=" />
+            <then>
+                <phingcall target="clean" />
+                <phingcall target="downloadphpdocumentor" />
+                <delete dir="${project.basedir}/doc"/>
+                <exec executable="php" dir="${project.basedir}/build">
+                    <arg path="${phpdocumentor}"/>
+                </exec>
+                <delete file="${phpdocumentor}"/>
+                <phingcall target="clean" />
+            </then>
+            <else>
+                <echo message="Build documentation only on PHP7.4 or higher" />
+            </else>
+        </if>
     </target>
 </project>
