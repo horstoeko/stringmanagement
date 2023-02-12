@@ -15,7 +15,6 @@
             <extensions>
                 <extension>php</extension>
             </extensions>
-            <default-package-name>horstoeko/multidocumentor</default-package-name>
             <include-source>true</include-source>
             <markers>
                 <marker>TODO</marker>
