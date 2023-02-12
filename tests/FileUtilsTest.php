@@ -138,10 +138,12 @@ class FileUtilsTest extends TestCase
      */
     public function testChangeFileExtension(): void
     {
-        $this->assertEquals("./file.new", FileUtils::changeFileExtension("file.txt", "new"));
-        $this->assertEquals("./file.new", FileUtils::changeFileExtension("file.txt", ".new"));
-        $this->assertEquals("/home/john/file.new", FileUtils::changeFileExtension("/home/john/file.txt", "new"));
-        $this->assertEquals("/home/john/file.new", FileUtils::changeFileExtension("/home/john/file.txt", ".new"));
+        $ds = DIRECTORY_SEPARATOR;
+
+        $this->assertEquals(".{$ds}file.new", FileUtils::changeFileExtension("file.txt", "new"));
+        $this->assertEquals(".{$ds}file.new", FileUtils::changeFileExtension("file.txt", ".new"));
+        $this->assertEquals("{$ds}home{$ds}john{$ds}file.new", FileUtils::changeFileExtension("{$ds}home{$ds}john{$ds}file.txt", "new"));
+        $this->assertEquals("{$ds}home{$ds}john{$ds}file.new", FileUtils::changeFileExtension("{$ds}home{$ds}john{$ds}file.txt", ".new"));
     }
 
     /**
