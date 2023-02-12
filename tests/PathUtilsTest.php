@@ -39,7 +39,7 @@ class PathUtilsTest extends TestCase
     {
         $ds = DIRECTORY_SEPARATOR;
 
-        $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("home", "user", "john"));
+        $this->assertEquals("home{$ds}user{$ds}john", PathUtils::combineAllPaths("home", "user", "john"));
         $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home", "user", "john"));
         $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home", "{$ds}user", "john"));
         $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home", "{$ds}user", "{$ds}john"));

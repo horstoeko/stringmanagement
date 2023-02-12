@@ -56,7 +56,11 @@ class PathUtils
      */
     public static function combineAllPaths(...$paths): string
     {
-        $result = "";
+        if (empty($paths)) {
+            return "";
+        }
+
+        $result = array_shift($paths);;
 
         foreach ($paths as $path) {
             $result = self::combinePathWithPath($result, $path);
