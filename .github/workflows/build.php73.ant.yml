@@ -6,6 +6,9 @@ on:
       - '**'
     branches:
       - '**'
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
 
 jobs:
   build:
