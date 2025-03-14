@@ -21,7 +21,7 @@ class FileUtilsTest extends TestCase
      */
     public function testFileToBase64(): void
     {
-        $this->assertEquals("SSBhbSBhIHRlc3RmaWxl", substr(FileUtils::fileToBase64(dirname(__FILE__) . "/data/tobase64.txt"), 0, 20));
+        $this->assertSame("SSBhbSBhIHRlc3RmaWxl", substr(FileUtils::fileToBase64(__DIR__ . "/data/tobase64.txt"), 0, 20));
         $this->assertEquals(false, FileUtils::fileToBase64(__FILE__ . ".xxx"));
     }
 
@@ -30,12 +30,12 @@ class FileUtilsTest extends TestCase
      */
     public function testFileToBase64File(): void
     {
-        $sourceFilename = dirname(__FILE__) . "/data/tobase64.txt";
-        $destinationFilename = dirname(__FILE__) . "/data/encbase64.txt";
+        $sourceFilename = __DIR__ . "/data/tobase64.txt";
+        $destinationFilename = __DIR__ . "/data/encbase64.txt";
         $this->assertTrue(FileUtils::fileToBase64File($sourceFilename, $destinationFilename));
         $this->assertTrue(FileUtils::fileExists($destinationFilename));
         $destinationFilenameContent = file_get_contents($destinationFilename);
-        $this->assertEquals("SSBhbSBhIHRlc3RmaWxl", substr($destinationFilenameContent, 0, 20));
+        $this->assertSame("SSBhbSBhIHRlc3RmaWxl", substr($destinationFilenameContent, 0, 20));
         @unlink($destinationFilename);
     }
 
@@ -44,8 +44,8 @@ class FileUtilsTest extends TestCase
      */
     public function testFileToBase64FileSourceNotExisting(): void
     {
-        $sourceFilename = dirname(__FILE__) . "/data/tobase64_2.txt";
-        $destinationFilename = dirname(__FILE__) . "/data/encbase64_2.txt";
+        $sourceFilename = __DIR__ . "/data/tobase64_2.txt";
+        $destinationFilename = __DIR__ . "/data/encbase64_2.txt";
         $this->assertFalse(FileUtils::fileToBase64File($sourceFilename, $destinationFilename));
         $this->assertFalse(FileUtils::fileExists($destinationFilename));
     }
@@ -56,11 +56,11 @@ class FileUtilsTest extends TestCase
     public function testBase64ToFile(): void
     {
         $sourceData = "SSBhbSBhIHRlc3RmaWxlLiBEb24ndCBtb2RpZnkgbWUuLi4=";
-        $destinationFilename = dirname(__FILE__) . "/data/decbase64.txt";
+        $destinationFilename = __DIR__ . "/data/decbase64.txt";
         $this->assertTrue(FileUtils::base64ToFile($sourceData, $destinationFilename));
         $this->assertTrue(FileUtils::fileExists($destinationFilename));
         $destinationFilenameContent = file_get_contents($destinationFilename);
-        $this->assertEquals("I am a testfile. Don", substr($destinationFilenameContent, 0, 20));
+        $this->assertSame("I am a testfile. Don", substr($destinationFilenameContent, 0, 20));
         @unlink($destinationFilename);
     }
 
@@ -69,12 +69,12 @@ class FileUtilsTest extends TestCase
      */
     public function testBase64FileToFile(): void
     {
-        $sourceFilename = dirname(__FILE__) . "/data/base64.txt";
-        $destinationFilename = dirname(__FILE__) . "/data/decbase64.txt";
+        $sourceFilename = __DIR__ . "/data/base64.txt";
+        $destinationFilename = __DIR__ . "/data/decbase64.txt";
         $this->assertTrue(FileUtils::base64FileToFile($sourceFilename, $destinationFilename));
         $this->assertTrue(FileUtils::fileExists($destinationFilename));
         $destinationFilenameContent = file_get_contents($destinationFilename);
-        $this->assertEquals("I am a testfile. Don", substr($destinationFilenameContent, 0, 20));
+        $this->assertSame("I am a testfile. Don", substr($destinationFilenameContent, 0, 20));
         @unlink($destinationFilename);
     }
 
@@ -83,14 +83,14 @@ class FileUtilsTest extends TestCase
      */
     public function testCombineFilenameWithFileextension(): void
     {
-        $this->assertEquals("file.txt", FileUtils::combineFilenameWithFileextension("file", "txt"));
-        $this->assertEquals("file.txt", FileUtils::combineFilenameWithFileextension("file.", "txt"));
-        $this->assertEquals("file.txt", FileUtils::combineFilenameWithFileextension("file.", ".txt"));
-        $this->assertEquals("file.txt", FileUtils::combineFilenameWithFileextension("file..", "txt"));
-        $this->assertEquals("file.txt", FileUtils::combineFilenameWithFileextension("file..", "..txt"));
-        $this->assertEquals("file.x.txt", FileUtils::combineFilenameWithFileextension("file.x", "txt"));
-        $this->assertEquals("file.x.txt", FileUtils::combineFilenameWithFileextension("file.x", ".txt"));
-        $this->assertEquals("/home/john/file.txt", FileUtils::combineFilenameWithFileextension("/home/john/file", "txt"));
+        $this->assertSame("file.txt", FileUtils::combineFilenameWithFileextension("file", "txt"));
+        $this->assertSame("file.txt", FileUtils::combineFilenameWithFileextension("file.", "txt"));
+        $this->assertSame("file.txt", FileUtils::combineFilenameWithFileextension("file.", ".txt"));
+        $this->assertSame("file.txt", FileUtils::combineFilenameWithFileextension("file..", "txt"));
+        $this->assertSame("file.txt", FileUtils::combineFilenameWithFileextension("file..", "..txt"));
+        $this->assertSame("file.x.txt", FileUtils::combineFilenameWithFileextension("file.x", "txt"));
+        $this->assertSame("file.x.txt", FileUtils::combineFilenameWithFileextension("file.x", ".txt"));
+        $this->assertSame("/home/john/file.txt", FileUtils::combineFilenameWithFileextension("/home/john/file", "txt"));
     }
 
     /**
@@ -98,8 +98,8 @@ class FileUtilsTest extends TestCase
      */
     public function testGetFileDirectory(): void
     {
-        $this->assertEquals("/home/john", FileUtils::getFileDirectory("/home/john/file.txt"));
-        $this->assertEquals("/home/john", FileUtils::getFileDirectory("/home/john/file.x.txt"));
+        $this->assertSame("/home/john", FileUtils::getFileDirectory("/home/john/file.txt"));
+        $this->assertSame("/home/john", FileUtils::getFileDirectory("/home/john/file.x.txt"));
     }
 
     /**
@@ -107,8 +107,8 @@ class FileUtilsTest extends TestCase
      */
     public function testGetFilenameWithExtension(): void
     {
-        $this->assertEquals("file.txt", FileUtils::getFilenameWithExtension("/home/john/file.txt"));
-        $this->assertEquals("file.x.txt", FileUtils::getFilenameWithExtension("/home/john/file.x.txt"));
+        $this->assertSame("file.txt", FileUtils::getFilenameWithExtension("/home/john/file.txt"));
+        $this->assertSame("file.x.txt", FileUtils::getFilenameWithExtension("/home/john/file.x.txt"));
     }
 
     /**
@@ -116,8 +116,8 @@ class FileUtilsTest extends TestCase
      */
     public function testGetFilenameWithoutExtension(): void
     {
-        $this->assertEquals("file", FileUtils::getFilenameWithoutExtension("/home/john/file.txt"));
-        $this->assertEquals("file.x", FileUtils::getFilenameWithoutExtension("/home/john/file.x.txt"));
+        $this->assertSame("file", FileUtils::getFilenameWithoutExtension("/home/john/file.txt"));
+        $this->assertSame("file.x", FileUtils::getFilenameWithoutExtension("/home/john/file.x.txt"));
     }
 
     /**
@@ -125,12 +125,12 @@ class FileUtilsTest extends TestCase
      */
     public function testGetFileExtension(): void
     {
-        $this->assertEquals(".txt", FileUtils::getFileExtension("file.txt", true));
-        $this->assertEquals(".txt", FileUtils::getFileExtension("file.x.txt", true));
-        $this->assertEquals(".txt", FileUtils::getFileExtension("/home/john/file.x.txt", true));
-        $this->assertEquals("txt", FileUtils::getFileExtension("file.txt"));
-        $this->assertEquals("txt", FileUtils::getFileExtension("file.x.txt"));
-        $this->assertEquals("txt", FileUtils::getFileExtension("/home/john/file.x.txt"));
+        $this->assertSame(".txt", FileUtils::getFileExtension("file.txt", true));
+        $this->assertSame(".txt", FileUtils::getFileExtension("file.x.txt", true));
+        $this->assertSame(".txt", FileUtils::getFileExtension("/home/john/file.x.txt", true));
+        $this->assertSame("txt", FileUtils::getFileExtension("file.txt"));
+        $this->assertSame("txt", FileUtils::getFileExtension("file.x.txt"));
+        $this->assertSame("txt", FileUtils::getFileExtension("/home/john/file.x.txt"));
     }
 
     /**
@@ -140,10 +140,10 @@ class FileUtilsTest extends TestCase
     {
         $ds = DIRECTORY_SEPARATOR;
 
-        $this->assertEquals(".{$ds}file.new", FileUtils::changeFileExtension("file.txt", "new"));
-        $this->assertEquals(".{$ds}file.new", FileUtils::changeFileExtension("file.txt", ".new"));
-        $this->assertEquals("{$ds}home{$ds}john{$ds}file.new", FileUtils::changeFileExtension("{$ds}home{$ds}john{$ds}file.txt", "new"));
-        $this->assertEquals("{$ds}home{$ds}john{$ds}file.new", FileUtils::changeFileExtension("{$ds}home{$ds}john{$ds}file.txt", ".new"));
+        $this->assertSame(sprintf('.%sfile.new', $ds), FileUtils::changeFileExtension("file.txt", "new"));
+        $this->assertSame(sprintf('.%sfile.new', $ds), FileUtils::changeFileExtension("file.txt", ".new"));
+        $this->assertSame(sprintf('%shome%sjohn%sfile.new', $ds, $ds, $ds), FileUtils::changeFileExtension(sprintf('%shome%sjohn%sfile.txt', $ds, $ds, $ds), "new"));
+        $this->assertSame(sprintf('%shome%sjohn%sfile.new', $ds, $ds, $ds), FileUtils::changeFileExtension(sprintf('%shome%sjohn%sfile.txt', $ds, $ds, $ds), ".new"));
     }
 
     /**
@@ -151,8 +151,8 @@ class FileUtilsTest extends TestCase
      */
     public function testGetFileSize(): void
     {
-        $this->assertEquals(35, FileUtils::getFileSize(dirname(__FILE__) . "/data/tobase64.txt"));
-        $this->assertEquals(0, FileUtils::getFileSize(dirname(__FILE__) . "/data/filenotexists.txt"));
+        $this->assertSame(35, FileUtils::getFileSize(__DIR__ . "/data/tobase64.txt"));
+        $this->assertSame(0, FileUtils::getFileSize(__DIR__ . "/data/filenotexists.txt"));
     }
 
     /**
@@ -160,7 +160,7 @@ class FileUtilsTest extends TestCase
      */
     public function testGetFileSizeFromBase64String(): void
     {
-        $this->assertEquals(35, FileUtils::getFileSizeFromBase64String("SSBhbSBhIHRlc3RmaWxlLiBEb24ndCBtb2RpZnkgbWUuLi4="));
-        $this->assertEquals(0, FileUtils::getFileSizeFromBase64String(""));
+        $this->assertSame(35, FileUtils::getFileSizeFromBase64String("SSBhbSBhIHRlc3RmaWxlLiBEb24ndCBtb2RpZnkgbWUuLi4="));
+        $this->assertSame(0, FileUtils::getFileSizeFromBase64String(""));
     }
 }

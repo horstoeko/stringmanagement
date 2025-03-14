@@ -44,7 +44,7 @@ class StringUtils
      */
     public static function strisstartingwith(string $astring, string $astartswith, bool $acaseinsensitive = false): bool
     {
-        return $acaseinsensitive === true
+        return $acaseinsensitive
             ? stripos($astring, $astartswith) === 0
             : strpos($astring, $astartswith) === 0;
     }

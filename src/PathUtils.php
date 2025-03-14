@@ -56,7 +56,7 @@ class PathUtils
      */
     public static function combineAllPaths(...$paths): string
     {
-        if (empty($paths)) {
+        if ($paths === []) {
             return "";
         }
 
@@ -84,7 +84,7 @@ class PathUtils
         $result = "";
 
         for ($level = 1; $level <= $maxLevel; $level++) {
-            $result = self::combinePathWithPath($result, chr(rand(97, 122)));
+            $result = self::combinePathWithPath($result, chr(random_int(97, 122)));
         }
 
         return $result;

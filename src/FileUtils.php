@@ -35,8 +35,8 @@ class FileUtils
     {
         $exists = file_exists($filename);
 
-        if ($exists === true && $checkreadable === true) {
-            $exists = is_readable($filename);
+        if ($exists && $checkreadable) {
+            return is_readable($filename);
         }
 
         return $exists;
@@ -87,11 +87,7 @@ class FileUtils
             return false;
         }
 
-        if (file_put_contents($toFilename, $base64String) === false) {
-            return false;
-        }
-
-        return true;
+        return file_put_contents($toFilename, $base64String) !== false;
     }
 
     /**
@@ -192,8 +188,8 @@ class FileUtils
     {
         $extension = ltrim(pathinfo($filename, PATHINFO_EXTENSION), ".");
 
-        if ($withdot === true) {
-            $extension = "." . $extension;
+        if ($withdot) {
+            return "." . $extension;
         }
 
         return $extension;

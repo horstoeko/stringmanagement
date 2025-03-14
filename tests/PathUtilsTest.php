@@ -14,9 +14,9 @@ class PathUtilsTest extends TestCase
     {
         $ds = DIRECTORY_SEPARATOR;
 
-        $this->assertEquals("{$ds}home{$ds}user{$ds}test.txt", PathUtils::combinePathWithFile("{$ds}home{$ds}user", "test.txt"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}test.txt", PathUtils::combinePathWithFile("{$ds}home{$ds}user{$ds}", "test.txt"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}test.txt", PathUtils::combinePathWithFile("{$ds}home{$ds}user", "{$ds}test.txt"));
+        $this->assertSame(sprintf('%shome%suser%stest.txt', $ds, $ds, $ds), PathUtils::combinePathWithFile(sprintf('%shome%suser', $ds, $ds), "test.txt"));
+        $this->assertSame(sprintf('%shome%suser%stest.txt', $ds, $ds, $ds), PathUtils::combinePathWithFile(sprintf('%shome%suser%s', $ds, $ds, $ds), "test.txt"));
+        $this->assertSame(sprintf('%shome%suser%stest.txt', $ds, $ds, $ds), PathUtils::combinePathWithFile(sprintf('%shome%suser', $ds, $ds), $ds . 'test.txt'));
     }
 
     /**
@@ -26,10 +26,10 @@ class PathUtilsTest extends TestCase
     {
         $ds = DIRECTORY_SEPARATOR;
 
-        $this->assertEquals("{$ds}home{$ds}user", PathUtils::combinePathWithPath("{$ds}home", "user"));
-        $this->assertEquals("{$ds}home{$ds}user", PathUtils::combinePathWithPath("{$ds}home", "{$ds}user"));
-        $this->assertEquals("{$ds}home{$ds}user", PathUtils::combinePathWithPath("{$ds}home{$ds}{$ds}", "{$ds}user"));
-        $this->assertEquals("{$ds}home{$ds}user", PathUtils::combinePathWithPath("{$ds}home{$ds}{$ds}", "user"));
+        $this->assertSame(sprintf('%shome%suser', $ds, $ds), PathUtils::combinePathWithPath($ds . 'home', "user"));
+        $this->assertSame(sprintf('%shome%suser', $ds, $ds), PathUtils::combinePathWithPath($ds . 'home', $ds . 'user'));
+        $this->assertSame(sprintf('%shome%suser', $ds, $ds), PathUtils::combinePathWithPath(sprintf('%shome%s%s', $ds, $ds, $ds), $ds . 'user'));
+        $this->assertSame(sprintf('%shome%suser', $ds, $ds), PathUtils::combinePathWithPath(sprintf('%shome%s%s', $ds, $ds, $ds), "user"));
     }
 
     /**
@@ -39,13 +39,13 @@ class PathUtilsTest extends TestCase
     {
         $ds = DIRECTORY_SEPARATOR;
 
-        $this->assertEquals("home{$ds}user{$ds}john", PathUtils::combineAllPaths("home", "user", "john"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home", "user", "john"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home", "{$ds}user", "john"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home", "{$ds}user", "{$ds}john"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home{$ds}{$ds}", "user", "john"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home{$ds}{$ds}", "{$ds}user{$ds}{$ds}", "john"));
-        $this->assertEquals("{$ds}home{$ds}user{$ds}john", PathUtils::combineAllPaths("{$ds}home{$ds}{$ds}", "{$ds}user{$ds}{$ds}", "{$ds}john"));
+        $this->assertSame(sprintf('home%suser%sjohn', $ds, $ds), PathUtils::combineAllPaths("home", "user", "john"));
+        $this->assertSame(sprintf('%shome%suser%sjohn', $ds, $ds, $ds), PathUtils::combineAllPaths($ds . 'home', "user", "john"));
+        $this->assertSame(sprintf('%shome%suser%sjohn', $ds, $ds, $ds), PathUtils::combineAllPaths($ds . 'home', $ds . 'user', "john"));
+        $this->assertSame(sprintf('%shome%suser%sjohn', $ds, $ds, $ds), PathUtils::combineAllPaths($ds . 'home', $ds . 'user', $ds . 'john'));
+        $this->assertSame(sprintf('%shome%suser%sjohn', $ds, $ds, $ds), PathUtils::combineAllPaths(sprintf('%shome%s%s', $ds, $ds, $ds), "user", "john"));
+        $this->assertSame(sprintf('%shome%suser%sjohn', $ds, $ds, $ds), PathUtils::combineAllPaths(sprintf('%shome%s%s', $ds, $ds, $ds), sprintf('%suser%s%s', $ds, $ds, $ds), "john"));
+        $this->assertSame(sprintf('%shome%suser%sjohn', $ds, $ds, $ds), PathUtils::combineAllPaths(sprintf('%shome%s%s', $ds, $ds, $ds), sprintf('%suser%s%s', $ds, $ds, $ds), $ds . 'john'));
     }
 
     /**
@@ -53,8 +53,8 @@ class PathUtilsTest extends TestCase
      */
     public function testGetHashedDirectory(): void
     {
-        $this->assertNotEquals("", PathUtils::getHashedDirectory(3));
-        $this->assertEquals(3, substr_count(PathUtils::getHashedDirectory(3), DIRECTORY_SEPARATOR));
+        $this->assertNotSame("", PathUtils::getHashedDirectory(3));
+        $this->assertSame(3, substr_count(PathUtils::getHashedDirectory(3), DIRECTORY_SEPARATOR));
         $this->assertStringStartsWith(DIRECTORY_SEPARATOR, PathUtils::getHashedDirectory(3));
         $this->assertStringEndsNotWith(DIRECTORY_SEPARATOR, PathUtils::getHashedDirectory(3));
         $this->expectException(\Exception::class);
@@ -73,16 +73,16 @@ class PathUtilsTest extends TestCase
         $createdDirectory = PathUtils::createHashedDirectory($baseDirectory, 3);
 
         $this->assertIsString($createdDirectory);
-        $this->assertNotEquals("", PathUtils::getHashedDirectory(3));
-        $this->assertEquals(3, substr_count(PathUtils::getHashedDirectory(3), DIRECTORY_SEPARATOR));
-        $this->assertStringStartsWith("{$ds}", PathUtils::getHashedDirectory(3));
-        $this->assertStringEndsNotWith("{$ds}", PathUtils::getHashedDirectory(3));
-        $this->assertTrue(is_dir($createdDirectory));
-        $this->assertTrue(file_exists($createdDirectory));
+        $this->assertNotSame("", PathUtils::getHashedDirectory(3));
+        $this->assertSame(3, substr_count(PathUtils::getHashedDirectory(3), DIRECTORY_SEPARATOR));
+        $this->assertStringStartsWith($ds, PathUtils::getHashedDirectory(3));
+        $this->assertStringEndsNotWith($ds, PathUtils::getHashedDirectory(3));
+        $this->assertDirectoryExists($createdDirectory);
+        $this->assertFileExists($createdDirectory);
 
         PathUtils::recursiveRemoveDirectory($baseDirectory);
 
-        $this->assertFalse(is_dir($createdDirectory));
-        $this->assertFalse(file_exists($createdDirectory));
+        $this->assertDirectoryDoesNotExist($createdDirectory);
+        $this->assertFileDoesNotExist($createdDirectory);
     }
 }
