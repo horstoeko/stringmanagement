@@ -60,7 +60,7 @@ class PathUtils
             return "";
         }
 
-        $result = array_shift($paths);;
+        $result = array_shift($paths);
 
         foreach ($paths as $path) {
             $result = self::combinePathWithPath($result, $path);
